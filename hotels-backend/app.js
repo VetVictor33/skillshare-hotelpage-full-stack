@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//requiring moongose
+const mongoose = require('mongoose');
+
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -11,6 +14,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+//setting the connection with the database
+mongoose.connect(DB_URL)
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', (error) => console.error(error.message));
 
 app.use(logger('dev'));
 app.use(express.json());
