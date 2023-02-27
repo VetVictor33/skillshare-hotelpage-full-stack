@@ -3,5 +3,40 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/header.css')
   body
+    header(class='header')
+      div(class='header-div')
+        a(href="/") 
+          img(src="images/logo.png", alt="logo")
+        nav
+          a(href='/sign-up') sign up
+          a(href='/login') login
+
+      form(class='header-form')
+        .search-fields
+          label(for='destination') Destination
+          input(id='destination', type='text')
+        .search-fields
+          label(for='duration') Duration nights
+          input(id='duration', type='number') 
+        .search-fields
+          label(for='departure') Departure date
+          input(id='departure', type='date')
+        .search-fields
+          label(for='guestsN') Number of guests
+          input(id='guestsN', type='number')
+        .search-fields
+        select#starts(name="stars")
+          option(value="1") Min 1 Star
+          option(value="2") Min 2 Star 
+          option(value="3") Min 3 Star
+          option(value="4") Min 4 Star
+          option(value="5") Min 5 Star
+        .search-fields
+        select#sort(name="sort") 
+          option(value="1") Price: Low - High
+          option(value="-1") Price: High - Low
+        button Search!
+      img(src="images/beach.jpg", alt="")
     block content
