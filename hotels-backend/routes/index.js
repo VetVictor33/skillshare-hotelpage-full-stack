@@ -5,9 +5,15 @@ var router = express.Router();
 const hotelController = require('../controllers/hotelController')
 
 /* GET home page. */
-router.get('/', hotelController.homePage);
+router.get('/', hotelController.homePageFilters);
 
 //Get all hotels page
-router.get('/all', hotelController.listAllHotel)
+router.get('/all', hotelController.listAllHotel);
+router.get('/countries', hotelController.listAllCountries);
+
+//Admin routers
+router.get('/admin', hotelController.adminPage);
+router.get('/admin/add', hotelController.createHotelGet);
+router.post('/admin/add', hotelController.createHotelPost);
 
 module.exports = router;

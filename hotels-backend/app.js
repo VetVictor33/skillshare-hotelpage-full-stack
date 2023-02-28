@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 //setting the connection with the database
+
 mongoose.connect(DB_URL)
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (error) => console.error(error.message));
