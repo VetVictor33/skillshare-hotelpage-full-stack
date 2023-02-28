@@ -51,3 +51,82 @@ exports.createHotelPost = async (req, res, next) => {
 exports.adminPage = (req, res) => {
     res.render('admin', { title: 'Admin' });
 }
+
+exports.editRemoveGet = (req, res) => {
+    res.render('edit_remove', { title: "Edit and Remove Hotels" })
+}
+
+exports.editRemovePost = async (req, res, next) => {
+    try {
+        const hotelId = req.body.hotel_id || null;
+        const hotelName = req.body.hotel_name || null;
+
+        const hotelData = await Hotel.find({
+            $or: [
+                { _id: hotelId },
+                { hotel_name: hotelName }
+            ]
+        }).collation({
+            locale: 'en',
+            strength: 2
+        });
+
+        if (hotelData.length > 0) {
+            res.render('hotel_detail', { title: 'Add or Remove Hotel', hotelData })
+            return
+        } else {
+            res.redirect('/admin/edit-remove')
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.updateHotelGet = async (req, res, next) => {
+    try {
+        const hotel = await Hotel.findOne({ _id: req.params.hotelId })
+        res.render('add_hotel', { title: 'Update hotel', hotel })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.updateHotelPost = async (req, res, next) => {
+    try {
+        const hotelId = req.params.hotelId;
+        const hotel = await Hotel.findByIdAndUpdate(hotelId, req.body, { new: true });
+        res.redirect(`/all/${hotelId}`)
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.deleteHotelGet = async (req, res, next) => {
+    try {
+        const hotelId = req.params.hotelId;
+        const hotel = await Hotel.findOne({ _id: hotelId });
+        res.render('add_hotel', { title: 'Delete Hotel', hotel });
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.deleteHotelPost = async (req, res, next) => {
+    try {
+        const hotelId = req.params.hotelId;
+        const hotel = await Hotel.findByIdAndRemove({ _id: hotelId });
+        res.redirect('/')
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.hotelDetail = async (req, res, next) => {
+    try {
+        const hotelId = req.params.hotelId;
+        const hotelData = await Hotel.find({ _id: hotelId });
+        res.render('hotel_detail', { title: "Let's travel", hotelData })
+    } catch (error) {
+        next(error)
+    }
+}

@@ -1,0 +1,9 @@
+extends layout 
+block content 
+    h3= title
+    form(action="" method="POST")
+        .form_input 
+            input#hotel_id(type="text", name="hotel_id" placeholder="Hotel Id")
+            p or: 
+            input#hotel_name(type="text", name='hotel_name' placeholder="Hotel name")
+            button(type="submit") Confirm

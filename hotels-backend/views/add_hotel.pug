@@ -1,18 +1,8 @@
 extends layout 
+include mixins/_hotel_form
 
 block content 
     a(href="/admin") 
         button(type='button') Back to admin
     h2= title 
-    form(action="" method="POST")
-        input#name(name="hotel_name" type="text" placeholder ='Hotel name' required)                        
-        textarea#description(name="hotel_description", placeholder ='Description' required)
-        input#image(type="file" name="image" required)
-        input#starRating(type="number" name="star_rating" placeholder="Star rating" required)
-        input#country(name="country" type="text" placeholder ='Country' required)
-        input#costPerNight(name="cost_per_night" type="number" placeholder ='Cost per night $' required)
-        select#available(name="availabe" required)
-            option(value="true") Availabe
-            option(value="false") Not availabe
-        
-        button(type="submit") Submit
+    +hotelForm(hotel)
