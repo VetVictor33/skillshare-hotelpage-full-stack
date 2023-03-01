@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('dotenv').config();
 
 //requiring moongose
 const mongoose = require('mongoose');
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 })
 
 //setting the connection with the database
+const DB_URL = process.env.DB_URL
 mongoose.connect(DB_URL)
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (error) => console.error(error.message));
