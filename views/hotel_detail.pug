@@ -2,10 +2,12 @@ extends layout
 include mixins/_hotel
 block content 
     each hotel in hotelData 
+        if url.startsWith('/admin')
+            a(href=`${hotel._id}/update`)
+                button(class='admin-btn') Update Hotel
+            a(href=`${hotel._id}/delete`)
+                button(class='admin-btn') Delete Hotel
+            a(href="/admin") 
+                button(class='admin-btn' type='button') Back to admin
         .hotel 
-            if url.startsWith('/admin')
-                a(href=`${hotel._id}/update`)
-                    button Update Hotel
-                a(href=`${hotel._id}/delete`)
-                    button Delete Hotel
             +hotel(hotel)

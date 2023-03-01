@@ -1,6 +1,6 @@
 mixin hotelForm(hotel={})
 
-    form(action="" method="POST")
+    form(class ='hotel-form' action="" method="POST")
             input#name(name="hotel_name" type="text" placeholder ='Hotel name' required value=hotel.hotel_name)                        
             textarea#description(name="hotel_description", placeholder ='Description' required )=hotel.hotel_description
             input#image(type="file" name="image")

@@ -26,7 +26,7 @@ exports.homePageFilters = async (req, res, next) => {
         ]);
         const countries = await Hotel.aggregate([
             { $group: { _id: '$country' } },
-            { $sample: { size: 3 } }
+            { $sample: { size: 6 } }
         ])
         res.render('index', { title: "Let's Travel!", countries, hotels });
     } catch (error) {
@@ -126,6 +126,16 @@ exports.hotelDetail = async (req, res, next) => {
         const hotelId = req.params.hotelId;
         const hotelData = await Hotel.find({ _id: hotelId });
         res.render('hotel_detail', { title: "Let's travel", hotelData })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.listHotelsByCountry = async (req, res, next) => {
+    try {
+        const country = req.params.country;
+        const countryList = await Hotel.find({ country: country });
+        res.render('hotels_by_country', { title: `Browse by Country: ${country}`, countryList })
     } catch (error) {
         next(error)
     }

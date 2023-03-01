@@ -1,0 +1,17 @@
+.admin_wrapper {
+    background-color: var(--background-secondary-color);
+    padding-bottom: 100px;
+}
+
+.admin_wrapper li {
+    font-family: var(--secondary-font);
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.admin_wrapper li:hover {
+    background-color: aliceblue;
+    width: fit-content;
+    border-radius: 50px;
+}
