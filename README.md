@@ -6,3 +6,4 @@ Express;
 Pug;
 MVC pattern;
 CRUD;
+Cloudinary;

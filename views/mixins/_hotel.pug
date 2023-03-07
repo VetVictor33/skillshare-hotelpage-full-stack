@@ -1,7 +1,8 @@
 mixin hotel(hotel)
   .hotel
       .hotel_img 
-        img(src=`/images/hotels/${hotel.image}`)
+        //- img(src=`/images/hotels/${hotel.image}`)
+        img(src=`https://res.cloudinary.com/dwx0ljg5w/image/upload/${hotel.image}.jpg`)
       .hotel_info 
         h3=hotel.hotel_name
         hr
@@ -17,3 +18,13 @@ mixin hotel(hotel)
         else 
           a(href=`/all`)
             button See all Hotels
+      if url === '/results'
+        .hotel_order_details 
+          p= `Number of guests: ${searchQuery.guestsN}`
+          p= `Number of nights: ${searchQuery.duration}`
+          p= `Departure date: ${searchQuery.departure}`
+          - const costEach = searchQuery.duration * hotel.cost_per_night
+          - const totalCost = costEach * searchQuery.guestsN
+          p= `Total per person $${costEach.toFixed(2)}`
+          hr
+          h3= `Total cost $${totalCost.toFixed(2)}`

@@ -19,19 +19,19 @@ html
           a(href='/sign-up') sign up
           a(href='/login') login
 
-      form(class='header-form')
+      form(class='header-form', action="/results" ,method="POST")
         .search-fields
           label(for='destination') Destination
-          input(id='destination', type='text')
+          input(name='destination', id='destination', type='text')
         .search-fields
           label(for='duration') Duration nights
-          input(id='duration', type='number') 
+          input(name='duration', id='duration', type='number') 
         .search-fields
           label(for='departure') Departure date
-          input(id='departure', type='date')
+          input(name='departure', id='departure', type='date')
         .search-fields
           label(for='guestsN') Number of guests
-          input(id='guestsN', type='number')
+          input(name='guestsN', id='guestsN' type='number')
         .search-fields-selects
           select#starts(name="stars")
             option(value="1") Min 1 Star

@@ -7,10 +7,10 @@ block content
   h2 Hotels
     a(href="/all") (see all):
   .hotel_wrapper
-    each hotel in hotels
+    each hotel in filteredHotels
       +hotel(hotel)
   h2 Countries
     a(href="/countries") (see all):
   .country_wrapper
-    each country in countries 
+    each country in filteredCountries 
       +countryList(country._id)

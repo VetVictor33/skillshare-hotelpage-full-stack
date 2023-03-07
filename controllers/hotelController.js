@@ -1,4 +1,33 @@
-const Hotel = require('../models/hotel')
+const Hotel = require('../models/hotel');
+const cloudinary = require('cloudinary');
+const multer = require('multer');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+})
+
+const storage = multer.diskStorage({});
+
+const upload = multer({ storage });
+
+exports.upload = upload.single('image');
+
+exports.pushToCloudinary = (req, res, next) => {
+    if (req.file) {
+        cloudinary.uploader.upload(req.file.path)
+            .then((result) => {
+                req.body.image = result.public_id;
+                next();
+            })
+            .catch(() => {
+                res.redirect('/admin/add')
+            })
+    } else {
+        next();
+    }
+}
 
 exports.listAllHotel = async (req, res, next) => {
     try {
@@ -20,15 +49,18 @@ exports.listAllCountries = async (req, res, next) => {
 
 exports.homePageFilters = async (req, res, next) => {
     try {
-        const hotels = await Hotel.aggregate([
-            { $match: { availabe: true } },
+        const hotels = Hotel.aggregate([
+            { $match: { available: true } },
             { $sample: { size: 3 } }
         ]);
-        const countries = await Hotel.aggregate([
+        const countries = Hotel.aggregate([
             { $group: { _id: '$country' } },
             { $sample: { size: 6 } }
         ])
-        res.render('index', { title: "Let's Travel!", countries, hotels });
+
+        const [filteredHotels, filteredCountries] = await Promise.all([hotels, countries])
+
+        res.render('index', { title: "Let's Travel!", filteredCountries, filteredHotels });
     } catch (error) {
         next(error)
     };
@@ -136,6 +168,22 @@ exports.listHotelsByCountry = async (req, res, next) => {
         const country = req.params.country;
         const countryList = await Hotel.find({ country: country });
         res.render('hotels_by_country', { title: `Browse by Country: ${country}`, countryList })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.searchResults = async (req, res, next) => {
+    try {
+        const searchQuery = req.body;
+        const parsedStarts = parseInt(searchQuery.stars);
+        const parsedSort = parseInt(searchQuery.sort);
+        const searchData = await Hotel.aggregate([
+            { $match: { $text: { $search: `\"${searchQuery.destination}\"` } } },
+            { $match: { available: true, star_rating: { $gte: parsedStarts } } },
+            { $sort: { cost_per_night: parsedSort } }
+        ])
+        res.render('search_results', { title: 'Search results', searchQuery, searchData });
     } catch (error) {
         next(error)
     }

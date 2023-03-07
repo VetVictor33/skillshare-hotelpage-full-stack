@@ -1,14 +1,14 @@
 mixin hotelForm(hotel={})
 
-    form(class ='hotel-form' action="" method="POST")
+    form(class ='hotel-form' action="" method="POST" enctype="multipart/form-data")
             input#name(name="hotel_name" type="text" placeholder ='Hotel name' required value=hotel.hotel_name)                        
             textarea#description(name="hotel_description", placeholder ='Description' required )=hotel.hotel_description
             input#image(type="file" name="image")
             input#starRating(type="number" name="star_rating" placeholder="Star rating" required value=hotel.star_rating)
             input#country(name="country" type="text" placeholder ='Country' required value=hotel.country)
             input#costPerNight(name="cost_per_night" type="number" placeholder ='Cost per night $' required value=hotel.cost_per_night)
-            select#available(name="availabe" required)
+            select#available(name="available" required)
                 option(value="true") Availabe
-                option(value="false") Not availabe
+                option(value="false") Not available
             
             button(type="submit") Confirm
