@@ -47,7 +47,7 @@
     justify-content: center;
 }
 
-.search-fields {
+.form_input {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +57,7 @@
     gap: 2px
 }
 
-.search-fields input {
+.form_input input {
     width: 90%;
     margin: 0 1em;
     padding: 10px;
@@ -68,24 +68,24 @@
     text-align: center;
 }
 
-.search-fields-selects {
+.form_input-selects {
     display: flex;
     gap: 15px;
 
 }
 
-.search-fields-selects select {
+.form_input-selects select {
     padding: 10px;
     border: none;
     border-radius: 5px;
 }
 
 #form-button {
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
 
-    width: 80%;
+    max-width: 100%;
     background-color: var(--background-primary-color);
 }
 

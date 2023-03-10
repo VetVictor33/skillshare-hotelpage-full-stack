@@ -20,19 +20,19 @@ html
           a(href='/login') login
 
       form(class='form', action="/results" ,method="POST")
-        .search-fields
+        .form_input 
           label(for='destination') Destination
           input(name='destination', id='destination', type='text')
-        .search-fields
+        .form_input 
           label(for='duration') Duration nights
           input(name='duration', id='duration', type='number') 
-        .search-fields
+        .form_input 
           label(for='departure') Departure date
           input(name='departure', id='departure', type='date')
-        .search-fields
+        .form_input 
           label(for='guestsN') Number of guests
           input(name='guestsN', id='guestsN' type='number')
-        .search-fields-selects
+        .form_input-selects
           select#starts(name="stars")
             option(value="1") Min 1 Star
             option(value="2") Min 2 Star 
