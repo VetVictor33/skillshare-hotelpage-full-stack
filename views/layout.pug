@@ -44,5 +44,13 @@ html
             option(value="1") Price: Low - High
             option(value="-1") Price: High - Low
         button#form-button Search!
+      
+      - const values = Object.values(flash)
+      - const keys = Object.keys(flash)
+      if keys.length > 0
+        div(class=`message message_${keys}`)
+          span= values
+          span.close_btn(onclick="this.parentNode.remove()") &times;
+
       img#bottom-img(src="/images/beach.jpg", alt="")
     block content

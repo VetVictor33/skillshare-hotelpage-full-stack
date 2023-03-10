@@ -10,6 +10,13 @@ const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 
+//for seesions
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+//for flash messages
+const flash = require('connect-flash');
+
 //passport.js:
 const User = require('./models/user');
 const passport = require('passport');
@@ -20,18 +27,29 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(session({
+  secret: process.env.SECRET,
+  saveUninitialized: false,
+  resave: false,
+  store: new MongoStore({ mongoUrl: process.env.DB_URL })
+}));
+
 //configure passport middleware
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
 
 passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//flash messages
+app.use(flash());
+
 //stores the urls in variables
 app.use((req, res, next) => {
   res.locals.url = req.path;
+  res.locals.flash = req.flash();
   next();
 })
 
