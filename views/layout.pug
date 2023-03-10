@@ -16,9 +16,11 @@ html
         a(href="/") 
           img(src="/images/logo.png", alt="logo")
         nav
-          a(href='/sign-up') sign up
-          a(href='/login') login
-          a(href='/logout') logout
+          if !user
+            a(href='/sign-up') sign up
+            a(href='/login') login
+          else
+            a(href='/logout') logout (#{user.first_name})
 
       form(class='form', action="/results" ,method="POST")
         .form_input 

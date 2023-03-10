@@ -19,5 +19,12 @@ mixin userForm()
         .form_input 
             label(for='confirm_password') Confirm password:
             input(type="password" name='confirm_password' id='confirm_password' required)
+        if url.startsWith('/admin')
+            .form_input 
+            h3 Is admin?
+            label(for="false") No
+            input(type="radio" id="false" name="isAdm" value='false' checked)
+            label(for="true") yes
+            input(type="radio" id="true" name="isAdm" value='true')
         .form-input 
             button#form-button(type='submit') Corfim

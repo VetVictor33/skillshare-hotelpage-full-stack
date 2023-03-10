@@ -15,7 +15,11 @@ router.get('/countries/:country', hotelController.listHotelsByCountry);
 router.post('/results', hotelController.searchResults);
 
 //Admin routers
-router.get('/admin', hotelController.adminPage);
+router.get('/admin',
+    userController.isAdmin,
+    hotelController.adminPage);
+router.get('/admin/*',
+    userController.isAdmin)
 router.get('/admin/add', hotelController.createHotelGet);
 router.post('/admin/add',
     hotelController.upload,
@@ -30,6 +34,7 @@ router.post('/admin/:hotelId/update',
     hotelController.updateHotelPost);
 router.get('/admin/:hotelId/delete', hotelController.deleteHotelGet);
 router.post('/admin/:hotelId/delete', hotelController.deleteHotelPost);
+router.get('/admin/add-user', userController.createUserGet);
 
 //User routers
 router.get('/sign-up', userController.signUpGet);

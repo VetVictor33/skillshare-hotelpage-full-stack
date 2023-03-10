@@ -63,3 +63,15 @@ exports.logout = (req, res) => {
         res.redirect('/');
     });
 }
+
+exports.isAdmin = (req, res, next) => {
+    if (req.isAuthenticated() && req.user.isAdmin) {
+        next();
+        return;
+    }
+    res.redirect('/');
+}
+
+exports.createUserGet = (req, res) => {
+    res.render('add_user', { title: "Add new user" });
+}
