@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+    h2= title 
+    form(class='form' action="/login" method='POST')
+        .form-input
+            label(for="email") Email: 
+            input(type="email" id='email' name='email')
+        .form-input
+            label(for="password") Password: 
+            input(type="password" id='password' name='password')
+        .form-input 
+            button#form-button(type='submit') Log in
