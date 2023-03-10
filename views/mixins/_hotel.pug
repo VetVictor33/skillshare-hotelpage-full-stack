@@ -18,6 +18,22 @@ mixin hotel(hotel)
         else 
           a(href=`/all`)
             button See all Hotels
+        if url.startsWith('/all/')
+          h3 Simulate an order
+          form(class='form', action="/results" ,method="POST")
+            .search-fields
+              label(for='destination') Destination
+              input(name='destination', id='destination', type='text', value=hotel.hotel_name)
+            .search-fields
+              label(for='duration') Duration nights
+              input(name='duration', id='duration', type='number') 
+            .search-fields
+              label(for='departure') Departure date
+              input(name='departure', id='departure', type='date')
+            .search-fields
+              label(for='guestsN') Number of guests
+              input(name='guestsN', id='guestsN' type='number')
+            button#form-button Simulate!
     if url === '/results'
       .hotel_order_details 
         h2 Order details
