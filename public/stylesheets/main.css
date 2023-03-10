@@ -95,6 +95,19 @@
     font-family: var(--primary-font);
 }
 
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+
+    max-width: 100%;
+    background-color: var(--background-primary-color);
+}
+
+.button-secondary {
+    background-color: var(--background-secondary-color);
+}
+
 @media (min-width: 1000px) {
     .hotel {
         flex-direction: row;

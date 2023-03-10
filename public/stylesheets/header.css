@@ -80,15 +80,6 @@
     border-radius: 5px;
 }
 
-#form-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-
-    max-width: 100%;
-    background-color: var(--background-primary-color);
-}
-
 #bottom-img {
     border-radius: 0 0 50px 50px;
     width: 100%;

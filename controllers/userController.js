@@ -1,9 +1,13 @@
 const User = require('../models/user');
 const Passport = require('passport');
+const Hotel = require('../models/hotel')
 
 //Express validator
 const { check, validationResult } = require('express-validator/check');
 const { sanitize } = require('express-validator/filter');
+
+
+const queryString = require('querystring');
 
 exports.signUpGet = (req, res) => {
     res.render('sign_up', { title: 'User Sign up' });
@@ -74,4 +78,15 @@ exports.isAdmin = (req, res, next) => {
 
 exports.createUserGet = (req, res) => {
     res.render('add_user', { title: "Add new user" });
+}
+
+exports.bookingConfirmation = async (req, res, next) => {
+    try {
+        const data = req.params.data;
+        const searchData = queryString.parse(data);
+        const hotel = await Hotel.find({ _id: searchData.id });
+        res.render('confirmation', { title: 'Booking confirmation', hotel, searchData })
+    } catch (error) {
+        next(error)
+    }
 }
