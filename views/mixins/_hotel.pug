@@ -1,11 +1,11 @@
 mixin hotel(hotel)
   .hotel
-      .hotel_img 
-        //- img(src=`/images/hotels/${hotel.image}`)
-        img(src=`https://res.cloudinary.com/dwx0ljg5w/image/upload/${hotel.image}.jpg`)
-      .hotel_info 
+    .hotel_img 
+      //- img(src=`/images/hotels/${hotel.image}`)
+      img(src=`https://res.cloudinary.com/dwx0ljg5w/image/upload/${hotel.image}.jpg`)
+    .hotel_info 
+      .hotel_details
         h3=hotel.hotel_name
-        hr
         if url.startsWith('/all/')
           p=hotel.hotel_description 
           hr
@@ -18,13 +18,13 @@ mixin hotel(hotel)
         else 
           a(href=`/all`)
             button See all Hotels
-      if url === '/results'
-        .hotel_order_details 
-          p= `Number of guests: ${searchQuery.guestsN}`
-          p= `Number of nights: ${searchQuery.duration}`
-          p= `Departure date: ${searchQuery.departure}`
-          - const costEach = searchQuery.duration * hotel.cost_per_night
-          - const totalCost = costEach * searchQuery.guestsN
-          p= `Total per person $${costEach.toFixed(2)}`
-          hr
-          h3= `Total cost $${totalCost.toFixed(2)}`
+    if url === '/results'
+      .hotel_order_details 
+        h2 Order details
+        p= `Number of guests: ${searchQuery.guestsN}`
+        p= `Number of nights: ${searchQuery.duration}`
+        p= `Departure date: ${searchQuery.departure}`
+        - const costEach = searchQuery.duration * hotel.cost_per_night
+        - const totalCost = costEach * searchQuery.guestsN
+        p= `Total per person $${costEach.toFixed(2)}`
+        h3= `Total cost $${totalCost.toFixed(2)}`

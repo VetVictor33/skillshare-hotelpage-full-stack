@@ -1,19 +1,20 @@
 .hotel_wrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1em;
 
     font-family: var(--primary-font);
 }
 
 .hotel {
     display: flex;
+    flex-direction: column;
+    background-color: white;
 }
 
 .hotel_img {
     flex: 1;
     padding: 0.1em;
-    background-color: var(--background-secondary-color);
     display: flex;
     justify-content: center;
 
@@ -27,12 +28,28 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0.3em;
 
+    align-items: center;
     width: 100%;
+
+    gap: 3px;
+    padding: 0.3em;
 }
 
-.hotel_info button {
+.hotel_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+
+    text-align: center;
+}
+
+.hotel_details>h3 {
+    border-bottom: solid rgb(88, 86, 86) 1.8px;
+}
+
+.hotel_details button {
     width: 100%;
     border: none;
     margin: 5px auto;
@@ -43,9 +60,27 @@
     background-color: var(--background-secondary-color);
 }
 
-.hotel_info a {
+.hotel_details a {
     margin: 0 auto;
-    width: 70%;
+    width: 50%;
+}
+
+.hotel_order_details {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    padding: 1em;
+
+    text-align: center;
+
+    background-color: rgb(228, 219, 202);
+}
+
+.hotel_order_details h3:last-child {
+    border-top: solid rgb(46, 46, 46) 1px;
+    padding: 10px;
 }
 
 .country_wrapper {
@@ -62,7 +97,7 @@
 
 @media (min-width: 1000px) {
     .hotel {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .hotel img {
@@ -73,5 +108,19 @@
     .hotel a {
         margin: 0 auto;
         width: 60%
+    }
+
+    .hotel_details {
+        text-align: left;
+        align-items: left;
+    }
+
+    .hotel_details a {
+        margin: 0;
+        width: fit-content;
+    }
+
+    .hotel_details button {
+        padding: 5px 20px;
     }
 }
