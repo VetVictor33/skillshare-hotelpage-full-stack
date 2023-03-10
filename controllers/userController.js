@@ -24,6 +24,8 @@ exports.signUpPost = [
         .custom((value, { req }) => value === req.body.password)
         .withMessage('Passwords do not match'),
 
+    sanitize('*').trim().escape(),
+
     (req, res, next) => {
         const erros = validationResult(req);
 
