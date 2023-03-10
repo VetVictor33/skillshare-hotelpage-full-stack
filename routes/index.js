@@ -3,7 +3,7 @@ var router = express.Router();
 
 //require the controller so the logic in the file can be used
 const hotelController = require('../controllers/hotelController');
-const hotel = require('../models/hotel');
+const userController = require('../controllers/userController');
 
 /* GET home page. */
 router.get('/', hotelController.homePageFilters);
@@ -30,5 +30,8 @@ router.post('/admin/:hotelId/update',
     hotelController.updateHotelPost);
 router.get('/admin/:hotelId/delete', hotelController.deleteHotelGet);
 router.post('/admin/:hotelId/delete', hotelController.deleteHotelPost);
+
+//User routers
+router.get('/sign-up', userController.signUpGet);
 
 module.exports = router;
