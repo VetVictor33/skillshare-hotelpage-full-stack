@@ -8,3 +8,4 @@ MVC pattern;
 CRUD;
 Cloudinary;
 Data validation sanitization with express-validator;
+Passport.js

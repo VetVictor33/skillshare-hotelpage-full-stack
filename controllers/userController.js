@@ -20,7 +20,7 @@ exports.signUpPost = [
         .withMessage('Email adresses do not match'),
     check('password').isLength({ min: 6 })
         .withMessage('Invalid password, password must be a minumum of six characters'),
-    check('confirm_passsword')
+    check('confirm_password')
         .custom((value, { req }) => value === req.body.password)
         .withMessage('Passwords do not match'),
 
@@ -31,8 +31,15 @@ exports.signUpPost = [
 
         if (!erros.isEmpty()) {
             res.render('sign_up', { title: 'Please fix the following erros:', erros: erros.array() })
+            return;
         } else {
-
+            const newUser = new User(req.body);
+            User.register(newUser, req.body.password, function (error) {
+                if (error) {
+                    console.log('error while registering!', error);
+                    return next(error);
+                }
+            });
         }
     }
 ]
