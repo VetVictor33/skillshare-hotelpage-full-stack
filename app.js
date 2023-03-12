@@ -5,7 +5,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const compression = require('compression');
-const helmet = require('helmet');
 
 //requiring moongose
 const mongoose = require('mongoose');
@@ -24,10 +23,10 @@ const User = require('./models/user');
 const passport = require('passport');
 
 var app = express();
-app.use(helmet());
 
 //compress responses
 app.use(compression());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
