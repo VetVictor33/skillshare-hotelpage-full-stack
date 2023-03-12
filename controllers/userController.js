@@ -1,10 +1,11 @@
 const User = require('../models/user');
 const Passport = require('passport');
 const Hotel = require('../models/hotel')
+const Order = require('../models/order')
 
 //Express validator
-const { check, validationResult } = require('express-validator/check');
-const { sanitize } = require('express-validator/filter');
+const { check, validationResult } = require('express-validator');
+const { sanitize } = require('express-validator');
 
 
 const queryString = require('querystring');
@@ -86,6 +87,64 @@ exports.bookingConfirmation = async (req, res, next) => {
         const searchData = queryString.parse(data);
         const hotel = await Hotel.find({ _id: searchData.id });
         res.render('confirmation', { title: 'Booking confirmation', hotel, searchData })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.orderPlaced = async (req, res, next) => {
+    try {
+        const data = req.params.data;
+        const parsedData = queryString.parse(data);
+        const order = new Order({
+            user_id: req.user._id,
+            hotel_id: parsedData.id,
+            order_details: {
+                duration: parsedData.duration,
+                dateOfDeparture: parsedData.departure,
+                numberOfGuests: parsedData.guestsN
+            }
+        });
+        await order.save();
+        req.flash('info', 'Thank you, your order has been placed!');
+        res.redirect('/my-account');
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.myAccount = async (req, res, next) => {
+    try {
+        const orders = await Order.aggregate([
+            { $match: { user_id: req.user.id } },
+            {
+                $lookup: {
+                    from: 'hotels',
+                    localField: 'hotel_id', //local field ta u want to match
+                    foreignField: '_id',    //the field to match in the other collection
+                    as: 'hotel_data' // the key in wich the info will be shown
+                }
+            }
+        ])
+        res.render('user_account', { title: 'My Account', orders });
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.allOrders = async (req, res, next) => {
+    try {
+        const orders = await Order.aggregate([
+            {
+                $lookup: {
+                    from: 'hotels',
+                    localField: 'hotel_id', //local field ta u want to match
+                    foreignField: '_id',    //the field to match in the other collection
+                    as: 'hotel_data' // the key in wich the info will be shown
+                }
+            }
+        ])
+        res.render('orders', { title: 'All Orders', orders });
     } catch (error) {
         next(error)
     }

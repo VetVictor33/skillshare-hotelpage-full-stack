@@ -45,9 +45,13 @@ mixin hotel(hotel, searchQuery)
         p= `Total per person $${costEach.toFixed(2)}`
         h3= `Total cost $${totalCost.toFixed(2)}`
 
-        - const query = `id=${hotel._id}&duration=${searchQuery.duration}&dateOfDeparture=${searchQuery.departure}&guestsN=${searchQuery.guestsN}`;
+        - const query = `id=${hotel._id}&duration=${searchQuery.duration}&departure=${searchQuery.departure}&guestsN=${searchQuery.guestsN}`;
 
-        if url === 'results'
+        if url === '/results'
           a.button.button-secondary(href=`/confirmation/${query}`) Continue
         else if url.startsWith('/confirmation/')
-          a.button.button-secondary(href=``) Place order
+          if user
+            a.button.button-secondary(href=`/order-placed/${query}`) Place order
+          else 
+            a.button.button-secondary(href=`/login`) Login to place the order
+

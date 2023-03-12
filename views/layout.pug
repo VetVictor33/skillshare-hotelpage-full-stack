@@ -10,6 +10,8 @@ html
     link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='/stylesheets/admin.css')
     link(rel='stylesheet', href='/stylesheets/hotel_form.css')
+    link(rel='stylesheet', href='/stylesheets/orders.css')
+    link(rel='stylesheet', href='/stylesheets/message.css')
   body
     header(class='header')
       div(class='header-div')
@@ -20,7 +22,11 @@ html
             a(href='/sign-up') sign up
             a(href='/login') login
           else
+            a(href='/my-account') Bookings/ Account
             a(href='/logout') logout (#{user.first_name})
+          if user && user.isAdmin
+            a(href='/admin') Admin session
+
 
       form(class='form', action="/results" ,method="POST")
         .form_input 

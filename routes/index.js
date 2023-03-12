@@ -35,6 +35,7 @@ router.post('/admin/:hotelId/update',
 router.get('/admin/:hotelId/delete', hotelController.deleteHotelGet);
 router.post('/admin/:hotelId/delete', hotelController.deleteHotelPost);
 router.get('/admin/add-user', userController.createUserGet);
+router.get('/admin/orders', userController.allOrders)
 
 //User routers
 router.get('/sign-up', userController.signUpGet);
@@ -45,5 +46,7 @@ router.get('/login', userController.loginGet);
 router.post('/login', userController.loginPost);
 router.get('/logout', userController.logout);
 router.get('/confirmation/:data', userController.bookingConfirmation);
+router.get('/order-placed/:data', userController.orderPlaced);
+router.get('/my-account', userController.myAccount);
 
 module.exports = router;

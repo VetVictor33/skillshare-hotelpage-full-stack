@@ -1,0 +1,38 @@
+.message span:first-child {
+    width: 100%;
+    text-align: center;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5em;
+
+    padding: 0 20px;
+
+    height: 100px;
+    width: 100%;
+    background-color: rgb(218, 218, 126);
+}
+
+.close_btn {
+    justify-self: flex-end;
+}
+
+.close_btn:hover {
+    cursor: pointer;
+}
+
+.message_info {
+    color: rgb(40, 92, 177);
+}
+
+.message_success {
+    color: rgb(39, 87, 39);
+}
+
+.message_error {
+    color: rgb(233, 66, 66);
+}
