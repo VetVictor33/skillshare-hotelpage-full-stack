@@ -8,6 +8,7 @@ const compression = require('compression');
 
 //requiring moongose
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
 
 var indexRouter = require('./routes/index');
 

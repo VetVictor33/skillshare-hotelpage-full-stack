@@ -5,7 +5,7 @@ const Order = require('../models/order')
 
 //Express validator
 const { check, validationResult } = require('express-validator');
-const { sanitize } = require('express-validator');
+const { body } = require('express-validator');
 
 
 const queryString = require('querystring');
@@ -30,7 +30,7 @@ exports.signUpPost = [
         .custom((value, { req }) => value === req.body.password)
         .withMessage('Passwords do not match'),
 
-    sanitize('*').trim().escape(),
+    body('*').trim().escape(),
 
     (req, res, next) => {
         const erros = validationResult(req);
