@@ -32,7 +32,7 @@ exports.pushToCloudinary = (req, res, next) => {
 
 exports.listAllHotel = async (req, res, next) => {
     try {
-        const allHotels = await Hotel.find({ availabe: { $eq: true } })
+        const allHotels = await Hotel.find({ available: { $eq: true } })
         res.render('all_hotels', { title: "All hotels", allHotels })
     } catch (error) {
         next(error)
