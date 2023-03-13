@@ -8,3 +8,13 @@ mixin orders(order)
                 li= `Departure: ${order.order_details.dateOfDeparture}`
                 li= `Nights: ${order.order_details.duration}`
                 li= `Guests: ${order.order_details.numberOfGuests}`
+                form.deleteForm(id = `deleteForm${order._id}` action=`/my-account/${order._id}` method='POST')
+                    button.button.submitBtn(id = `submitBtn${order._id}` type="submit") Delete
+    
+    .modal 
+        p= `Are you sure you want to delet order ref: ${order._id}?`
+        div
+            button.button.button-secondary#confirmModal Yes! 
+            button.button.button-secondary#cancelModal Cancel
+
+    script(src='../javascripts/modal.js')

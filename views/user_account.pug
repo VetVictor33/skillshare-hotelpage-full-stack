@@ -2,16 +2,19 @@ extends layout
 include mixins/_orders
 block content 
 
-    h2=title 
-    if user 
-        h3=`Hi, ${user.first_name}!`
-        if orders.length > 0
-            h3 Your bookings 
-            .bookings 
-                each order in orders 
-                    +orders(order)
+    h2=title
+    .account-greetings
+        if user 
+            h3=`Hi, ${user.first_name}!`
+            if orders.length > 0
+                h3 Your bookings 
+                .bookings 
+                    each order in orders 
+                        +orders(order)
 
+            else 
+                h3 There are no orders yet...
+                a(href="/all") 
+                    button.button See our hotels!
         else 
-            h3 No orders yet 
-    else 
-        h3 Log in to view this section
+            h3 Log in to view this section

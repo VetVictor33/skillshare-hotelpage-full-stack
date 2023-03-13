@@ -4,6 +4,7 @@ var router = express.Router();
 //require the controller so the logic in the file can be used
 const hotelController = require('../controllers/hotelController');
 const userController = require('../controllers/userController');
+const orderController = require('../controllers/orderController');
 
 /* GET home page. */
 router.get('/', hotelController.homePageFilters);
@@ -48,5 +49,8 @@ router.get('/logout', userController.logout);
 router.get('/confirmation/:data', userController.bookingConfirmation);
 router.get('/order-placed/:data', userController.orderPlaced);
 router.get('/my-account', userController.myAccount);
+
+//orders
+router.post('/my-account/:orderId', orderController.deleteOrder)
 
 module.exports = router;

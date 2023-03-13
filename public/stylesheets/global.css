@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style-type: none;
+}
+
 body {
   max-width: 1600px;
   margin: 0 auto;
