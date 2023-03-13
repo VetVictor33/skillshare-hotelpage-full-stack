@@ -9,16 +9,24 @@ I did my best to make this project look more like me and not simply be a copy of
 
 Pug:
 -An easy way to create templates with less code and reuse of implemented logic;
+
 MVC pattern:
 -Learned how the model, view, and controller pattern works and how it makes it easier to organize the directories and the logic as a whole;
+
 Express:
 -Lerned how to create the backend with its routes, the logic needed to access the database, how to validate user input before storing them, and much more!;
+
 MongoDB:
 -Strengthened my knowledge in MongoDB, how to create schemas, data models, and others;
+
 CRUD:
 -Create, read, update, and delete data from the database through the backend;
+
 Cloudinary:
 -Storing images in the cloud;
+
 Data validation sanitization with express-validator;
+
 Passport.js;
+
 password encrypting with bcrypt;
