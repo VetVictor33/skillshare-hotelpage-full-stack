@@ -1,0 +1,9 @@
+extends layout 
+include mixins/_users
+
+block content 
+    h2=title
+    each user in users 
+        +user(user)
+
+    script(src='../javascripts/user_modal.js')

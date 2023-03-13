@@ -1,0 +1,21 @@
+mixin user(user)
+
+    .user 
+        p#userName=`Name: ${user.first_name}`
+        p=`Surname: ${user.surname}`
+        p=`Email: ${user.email}`
+        if user.isAdmin
+            p Status: Admin 
+        else 
+            p Status: Regular custumer
+
+        form.user-form( id=`user-form-${user.email}` action="", method="post") 
+            button.button.submitBtn#updateUserBtn Change user status
+            button.button.submitBtn#deleteUserBtn Delete user
+        hr
+        
+        .modal.delete-user 
+            p= `Are you sure you want to delet user: ${user.first_name}?`
+            div
+                button.button.button-secondary#confirmModal Yes! 
+                button.button.button-secondary#cancelModal Cancel

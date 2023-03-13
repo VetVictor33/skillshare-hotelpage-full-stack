@@ -5,6 +5,7 @@ var router = express.Router();
 const hotelController = require('../controllers/hotelController');
 const userController = require('../controllers/userController');
 const orderController = require('../controllers/orderController');
+const adminController = require('../controllers/adminController');
 
 /* GET home page. */
 router.get('/', hotelController.homePageFilters);
@@ -35,8 +36,8 @@ router.post('/admin/:hotelId/update',
     hotelController.updateHotelPost);
 router.get('/admin/:hotelId/delete', hotelController.deleteHotelGet);
 router.post('/admin/:hotelId/delete', hotelController.deleteHotelPost);
-router.get('/admin/add-user', userController.createUserGet);
-router.get('/admin/orders', userController.allOrders)
+router.get('/admin/orders', userController.allOrders);
+router.get('/admin/users', adminController.listUsers);
 
 //User routers
 router.get('/sign-up', userController.signUpGet);

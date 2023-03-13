@@ -77,10 +77,6 @@ exports.isAdmin = (req, res, next) => {
     res.redirect('/');
 }
 
-exports.createUserGet = (req, res) => {
-    res.render('add_user', { title: "Add new user" });
-}
-
 exports.bookingConfirmation = async (req, res, next) => {
     try {
         const data = req.params.data;
